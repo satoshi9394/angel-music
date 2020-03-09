@@ -1,9 +1,10 @@
 <template lang='pug'>
   #app
     input(v-model="name")
-    p {{ name }}
+    input(v-model="lastName")
+    input(v-model="date")
 
-    a(:href="url") Link <!--v-bind or : es lo mismo -->
+    p {{ fullname }}
 </template>
 
 <script>
@@ -12,8 +13,20 @@ export default {
   data () {
     return {
       name: '',
+      lastName: '',
+      date: null
+    }
+  },
 
-      url: 'https://platzi.com/clases/'
+  computed: {
+    fullname () {
+      return `${this.name} ${this.lastName}`
+    }
+  },
+
+  watch: {
+    name (newVal, oldVal) {
+      console.log(newVal, oldVal)
     }
   }
 }
