@@ -1,12 +1,9 @@
 <template lang='pug'>
   #app
-    p(v-show="showValue") {{ value }}<!--sirve para poner la propiedad none de display-->
-    p(v-if="showValue") {{ value }}<!--si es false ni siquiera lo crea en el dom-->
-    p(v-else-if="false") {{ 'algo mas' }}
-    p(v-else) {{ 'lo ultimo' }}
+    input(v-model="name")
+    p {{ name }}
 
-    ul
-      li(v-for="item in items") {{ item }}
+    a(:href="url") Link <!--v-bind or : es lo mismo -->
 </template>
 
 <script>
@@ -14,12 +11,9 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Hello word!',
+      name: '',
 
-      showValue: false,
-      value: 'algo',
-
-      items: [1, 2, 3, 4, 5]
+      url: 'https://platzi.com/clases/'
     }
   }
 }
