@@ -1,8 +1,12 @@
 <template lang='pug'>
   #app
-    img(src="./assets/logo.png")
     h1 {{ msg }}
-
+    p {{ 1 + 1 }}
+    p {{ 'hola' + 'mundo' }}
+    p {{ person.name }}
+    p {{ person.name.toUpperCase() }}
+    p {{ JSON.stringify(person) }}
+    p {{ true ? 'true' : 'false' }}
 </template>
 
 <script>
@@ -10,7 +14,11 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Hello word!'
+      msg: 'Hello word!',
+
+      person: {
+        name: 'Juan'
+      }
     }
   }
 }
