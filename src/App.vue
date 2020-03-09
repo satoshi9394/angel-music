@@ -1,10 +1,10 @@
 <template lang='pug'>
   #app
     input(v-model="name")
-    input(v-model="lastName")
-    input(v-model="date")
+    button(v-on:click="format") Format(v-on)
+    button(@click="format") Format(reducion de v-on)
+    p {{ formatName }}
 
-    p {{ fullname }}
 </template>
 
 <script>
@@ -13,20 +13,13 @@ export default {
   data () {
     return {
       name: '',
-      lastName: '',
-      date: null
+      formatName: ''
     }
   },
 
-  computed: {
-    fullname () {
-      return `${this.name} ${this.lastName}`
-    }
-  },
-
-  watch: {
-    name (newVal, oldVal) {
-      console.log(newVal, oldVal)
+  methods: {
+    format () {
+      this.formatName = this.name.split(' ').join('-').toUpperCase()
     }
   }
 }
