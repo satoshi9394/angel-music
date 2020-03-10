@@ -1,7 +1,7 @@
 <template lang='pug'>
   #app
     section.large
-      nav.navbar
+      nav.nav
         .container
           .input-group
             input.form-control(
@@ -10,18 +10,18 @@
               v-model="searchQuery")
             .input-group-append
               a.btn.btn-primary(@click="search") buscar
-              a.btn.btn-danger x
-            p {{ searchMessage }}
+              a.btn.btn-danger x 
+          .container    
+            p {{ searchMessage }}    
+
       .container
         .row
-          .col(v-for="t in tracks") {{ t.name }} - {{ t.artis }}
+          .col(v-for="t in tracks")
+            | {{ t.name }} - {{ t.artists[0].name }}
 </template>
 
 <script>
-const tracks = [
-  { name: 'muchacha', artis: 'luis alberto' },
-  { name: 'hoy aca en el baile', artis: 'el pepo' },
-  { name: 'i was made for loving', artis: 'kiss' }]
+import trackService from './services/track';
 
 export default {
   name: 'app',
@@ -40,7 +40,12 @@ export default {
 
   methods: {
     search () {
-      this.tracks = tracks
+      if(!this.searchQuery) { return }
+
+      trackService.search(this.searchQuery)
+        .then(res => {
+          this.tracks = res.tracks.items
+        })
     }
   }
 }
